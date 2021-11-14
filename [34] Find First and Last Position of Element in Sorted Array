@@ -1,0 +1,37 @@
+class Solution {
+    public int first(int a[],int t){
+        if(a[0]==t){return 0;}
+        int l=0,h=a.length-1;
+        while(l<h){
+            int m = l+(h-l)/2;
+            if(a[m]==t){
+                if(a[m-1]!=t){return m;}
+                else{h=m-1;continue;}
+            }
+            if(a[m]>t){h=m-1;}
+            else{l=m+1;}
+        }
+        if(l==h){if(a[l]==t){if(a[l-1]!=t){return l;}}}
+        return -1;
+    }
+    public int last(int a[],int t){
+        if(a[a.length-1]==t){return a.length-1;}
+        int l=0,h=a.length-1;
+        while(l<h){
+            int m = l+(h-l)/2;
+            if(a[m]==t){
+                if(a[m+1]!=t){return m;}
+                else{l=m+1;continue;}
+            }
+            if(a[m]>t){h=m-1;}
+            else{l=m+1;}
+        }
+        if(l==h){if(a[l]==t){if(a[l+1]!=t){return l;}}}
+        return -1;
+    }
+    
+    public int[] searchRange(int[] nums, int target) {
+        if(nums.length==0){return new int[]{-1,-1};}
+        return new int[]{first(nums,target),last(nums,target)};
+    }
+}
