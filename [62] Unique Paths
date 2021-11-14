@@ -1,0 +1,15 @@
+class Solution {
+    int m,n;
+    int DP[][];
+    public int traverse(int i,int j){
+        if(i==m-1 || j==n-1){return DP[i][j] = 1;}
+        if(DP[i][j]!=0){return DP[i][j];}
+        return DP[i][j] = traverse(i+1,j)+traverse(i,j+1);
+    }
+    public int uniquePaths(int m, int n) {
+        this.m=m;
+        this.n=n;
+        DP = new int[m][n];
+        return traverse(0,0);
+    }
+}
