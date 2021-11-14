@@ -1,0 +1,45 @@
+class Solution {
+    public void multiply(String s,int n,int arr[],int offset){
+        int carry=0;
+        int j=offset;
+        int carry_sum=0;
+        for(int i=s.length()-1;i>=0;i--){
+            int res = n*(s.charAt(i)-'0');
+            res+=carry;
+            carry = res/10;
+            res%=10;
+            int sum = res + carry_sum + arr[j];
+            carry_sum = sum/10;
+            sum%=10;
+            arr[j--]=sum;
+        }
+        if(carry!=0){
+            int sum = carry_sum + arr[j] + carry;
+            carry_sum = sum/10;
+            sum%=10;
+            arr[j--]=sum;
+        }
+        while(carry_sum!=0){
+            int sum = carry_sum + arr[j];
+            carry_sum = sum/10;
+            sum%=10;
+            arr[j--] = sum;
+        }
+    }
+    public String multiply(String A, String B) {
+        int res[] = new int[A.length() + B.length()];
+        int offset = res.length - 1;
+        for(int i=A.length()-1;i>=0;i--){
+            multiply(B,A.charAt(i)-'0',res,offset);
+            offset--;
+        }
+        StringBuilder sb = new StringBuilder();
+        int i=0;
+        while(i<res.length && res[i]==0){i++;}
+        if(i==res.length){return "0";}
+        while(i<res.length){
+            sb.append(res[i++]);
+        }
+        return (sb.toString());
+    }
+}
