@@ -1,0 +1,19 @@
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        ArrayList<Integer> order = new ArrayList<>();
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for(int x:nums){
+            if(!map.containsKey(x)){map.put(x,0);order.add(x);}
+            if(map.get(x)==2){continue;}
+            map.put(x,map.get(x)+1);
+        }
+        int k=0;
+        for(int x:order){
+            for(int i=0;i<map.get(x);i++){
+                nums[k]=x;
+                k++;
+            }
+        }
+        return k;
+    }
+}
