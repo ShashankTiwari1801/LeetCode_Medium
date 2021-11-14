@@ -1,0 +1,22 @@
+class Solution {
+    int DP[][];
+    public int traverse(int grid[][],int i,int j){
+       // if(i>=grid.length || j>=grid[0].length){return 300000;}
+        if(i==grid.length-1 && j==grid[0].length-1){return DP[i][j] = grid[i][j];}
+        if(DP[i][j]!=-1){return DP[i][j];}
+        if(i==grid.length-1){
+            return DP[i][j] = grid[i][j] + traverse(grid,i,j+1);
+        }
+        if(j==grid[0].length-1){
+            return DP[i][j] = grid[i][j] + traverse(grid,i+1,j);
+        }
+        return DP[i][j] = grid[i][j] + Math.min(traverse(grid,i+1,j),traverse(grid,i,j+1));
+    }
+    public int minPathSum(int[][] grid) {
+        DP = new int[grid.length][grid[0].length];
+        for(int a[]:DP){
+            Arrays.fill(a,-1);
+        }
+        return traverse(grid,0,0);
+    }
+}
