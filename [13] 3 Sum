@@ -1,0 +1,19 @@
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        Arrays.sort(nums);
+        int N = nums.length;
+        for(int i=0;i<N-2;i++){
+            int L=i+1,H=N-1;
+            while(L<H){
+                int sum = nums[i]+nums[L]+nums[H];
+                if(sum==0){            
+                    res.add(Arrays.asList(nums[i],nums[L],nums[H]));
+                }
+                if(sum>0){H--;}
+                else{L++;}
+            }
+        }
+        return res;
+    }
+}
