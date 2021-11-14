@@ -1,0 +1,16 @@
+class Solution {
+    List<List<Integer>> res = new ArrayList<>();
+    public void traverse(int a[],List<Integer> list){
+        if(list.size()==a.length){res.add(new ArrayList<>(list));}
+        for(int j=0;j<a.length;j++){
+            if(list.contains(a[j])){continue;}
+            list.add(a[j]);
+            traverse(a,list);
+            list.remove(list.size()-1);
+        }
+    }
+    public List<List<Integer>> permute(int[] nums) {
+        traverse(nums,new ArrayList<>());
+        return res;
+    }
+}
