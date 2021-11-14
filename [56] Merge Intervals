@@ -1,0 +1,30 @@
+class Solution {
+    public class PairComparator implements Comparator<int[]> {
+        @Override
+        public int compare(int a[], int b[]) {
+            return a[0]-b[0];
+        }
+    }
+    public int[][] merge(int[][] in) {
+        Arrays.sort(in,new PairComparator());
+        int end_max=in[0][1];
+        int start = in[0][0];
+        ArrayList<int[]> arr = new ArrayList<>();
+        for(int i=1;i<in.length;i++){
+            if(in[i][0]<=end_max){
+                end_max = Math.max(end_max,in[i][1]);
+            }
+            else{
+                arr.add(new int[]{start,end_max});
+                start = in[i][0];
+                end_max = in[i][1];
+            }
+        }
+        arr.add(new int[]{start,end_max});
+        int res[][] = new int[arr.size()][2];
+        for(int i=0;i<res.length;i++){
+            res[i] = arr.get(i);
+        }
+        return res;
+    }
+}
