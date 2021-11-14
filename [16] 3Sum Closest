@@ -1,0 +1,17 @@
+class Solution {
+    public int threeSumClosest(int[] a, int t) {
+        int res=-1,diff=Integer.MAX_VALUE;
+        Arrays.sort(a);
+        for(int i=0;i<a.length-1-1;i++){
+            int l=i+1,h=a.length-1;
+            while(l<h){
+                int sum = a[i]+a[l]+a[h];
+                if(sum==t){return t;}
+                if(Math.abs(t-sum)<diff){diff=Math.abs(t-sum);res=sum;}
+                if(sum>t){h--;}
+                else{l++;}
+            }
+        }
+        return res;
+    }
+}
