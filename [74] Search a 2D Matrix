@@ -1,0 +1,18 @@
+class Solution {
+    public boolean searchMatrix(int[][] a, int t) {
+        int n = a.length;
+        int m = a[0].length;
+        int L=0,H=(m*n)-1;
+        while(L<H){
+            int M = L+(H-L)/2;
+            int i = M/m;
+            int j = M%m;    
+            //System.out.println(i+" | "+j);
+            if(a[i][j]==t){return true;}
+            if(a[i][j]>t){H=M-1;}
+            if(a[i][j]<t){L=M+1;}
+        }
+        if(L==H){if(a[L/m][L%m]==t){return true;}}
+        return false;
+    }
+}
