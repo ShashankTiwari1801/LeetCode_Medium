@@ -1,0 +1,20 @@
+class Solution {
+    int count=0;
+    public void makeBalanceBrackets(int o,int c,List<String> list,String curr){
+        count++;
+        if(c<o){return;}
+        if(c<0 || o<0){return;}
+        if(c==0 && o==0){list.add(curr);}
+        if(c==o){makeBalanceBrackets(o-1,c,list,curr+"(");return;}
+        makeBalanceBrackets(o-1,c,list,curr+"(");
+        makeBalanceBrackets(o,c-1,list,curr+")");
+    }
+    
+    public List<String> generateParenthesis(int N) {
+        List<String> list = new ArrayList<>();
+        if(N==0){return list;}
+        if(N==1){list.add("()");return list;}
+        makeBalanceBrackets(N,N,list,"");
+        return list;
+    }
+}
