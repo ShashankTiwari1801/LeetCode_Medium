@@ -1,0 +1,21 @@
+class Solution {
+public String longestPalindrome(String s) {
+        int S=0,E=0;
+        for(int i=0;i<s.length();i++){
+            int lE = expand(s,i,i);
+            int lO = expand(s,i,i+1);
+            int l = Math.max(lE,lO);
+            if(l>E-S){
+                S = i-(l-1)/2;
+                E = i+(l)/2;
+            }
+        }
+        return s.substring(S,E+1);
+    }
+    public int expand(String s,int L,int R){
+        while(L>=0 && R<s.length() && (s.charAt(L)==s.charAt(R))){
+            L--;R++;
+        }
+        return R-L-1;
+    }
+}
