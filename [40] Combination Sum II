@@ -1,0 +1,26 @@
+class Solution {
+    
+    Set<List<Integer>> res2 = new HashSet<>();
+    int bag2[];
+    int req2=0;
+    
+    void traverse2(int i,int sum,List<Integer> curr){
+        if(sum==req2){res2.add(curr);}
+        if(i>=bag2.length){return;}
+        if(sum>req2){return;}
+        List<Integer> lst = new ArrayList<>(curr);
+        lst.add(bag2[i]);
+        traverse2(i+1,sum+bag2[i],lst);
+        traverse2(i+1,sum,curr);
+    }
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        
+        bag2 = candidates;
+        req2 = target;
+        Arrays.sort(bag2);
+        traverse2(0,0,new ArrayList<>());
+        
+        return new ArrayList<>(res2);
+        
+    }
+}
