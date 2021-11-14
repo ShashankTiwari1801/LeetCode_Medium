@@ -1,0 +1,18 @@
+class Solution {
+    List<List<Integer>> res = new ArrayList<>();
+    List<Integer> list = new ArrayList<>();
+    public void traverse(int n,int k){
+        if(k==0){res.add(new ArrayList<>(list));return;}
+        if(n<1){return;}
+        if(k<0){return;}
+        list.add(n);
+        traverse(n-1,k-1);
+        list.remove(list.size()-1);
+        traverse(n-1,k);
+    }
+    
+    public List<List<Integer>> combine(int n, int k) {
+        traverse(n,k);
+        return res;
+    }
+}
